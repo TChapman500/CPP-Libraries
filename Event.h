@@ -1,28 +1,30 @@
 #pragma once
 #include <vector>
 
-class EventListener
+namespace TChapman500
 {
-public:
-	virtual ~EventListener() {}
-};
+	class EventListener
+	{
+	public:
+		virtual ~EventListener() {}
+	};
 
-typedef void (EventListener:: *Function)(void *);
+	typedef void (EventListener:: *Function)(void *);
 
-class Event
-{
-public:
-	Event();
-	~Event();
+	class Event
+	{
+	public:
+		Event();
+		~Event();
 
-	void AddListener(EventListener *listener, Function function);
-	void RemoveListener(EventListener *listener, Function function);
+		void AddListener(EventListener *listener, Function function);
+		void RemoveListener(EventListener *listener, Function function);
 
-	void Fire();
-	void Fire(void *data);
+		void Fire();
+		void Fire(void *data);
 
-private:
-	std::vector<EventListener *> Listeners;
-	std::vector<Function> Functions;
-};
-
+	private:
+		std::vector<EventListener *> Listeners;
+		std::vector<Function> Functions;
+	};
+}
