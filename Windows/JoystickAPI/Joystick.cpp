@@ -67,7 +67,7 @@ namespace TChapman500
 					hatDown->SetName(L"HAT Switch (Down)");
 					ButtonList.push_back(hatDown);
 
-					InputButton *hatLeft = new InputButton((unsigned short)(buttonCount + 2));
+					InputButton *hatLeft = new InputButton((unsigned short)(buttonCount + 3));
 					hatLeft->SetName(L"HAT Switch (Left)");
 					ButtonList.push_back(hatLeft);
 
