@@ -14,6 +14,8 @@ namespace TChapman500
 			InputAxis(HIDP_VALUE_CAPS *caps);
 			virtual ~InputAxis();
 			virtual void SetValue(unsigned long value) override;
+			bool IsButton() override;
+			bool IsHAT() override;
 
 			USAGE Page;
 			USAGE Usage;

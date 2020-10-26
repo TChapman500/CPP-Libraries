@@ -34,7 +34,13 @@ namespace TChapman500
 			else if (Left->Pressed) value = 7;
 			else value = 0;
 
-			InputHAT::SetValue(value);
+			direction newDirection = (direction)(value - MinValue);
+			if (newDirection < (direction)0) newDirection = direction::None;
+
+			if (newDirection != Direction) MovedThisFrame = true;
+			else MovedThisFrame = false;
+
+			Direction = newDirection;
 		}
 	}
 }

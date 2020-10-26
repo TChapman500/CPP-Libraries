@@ -55,12 +55,30 @@ namespace TChapman500
 				// HAT Switch
 				if (axisList[i].Range.UsageMin == 0x39)
 				{
-					InputHAT *newHAT = new InputHAT(&axisList[i], (unsigned short)i);
+					InputButton *hatUp = new InputButton((unsigned short)(buttonCount));
+					hatUp->SetName(L"HAT Switch (Up)");
+					ButtonList.push_back(hatUp);
+
+					InputButton *hatRight = new InputButton((unsigned short)(buttonCount + 1));
+					hatRight->SetName(L"HAT Switch (Right)");
+					ButtonList.push_back(hatRight);
+
+					InputButton *hatDown = new InputButton((unsigned short)(buttonCount + 2));
+					hatDown->SetName(L"HAT Switch (Down)");
+					ButtonList.push_back(hatDown);
+
+					InputButton *hatLeft = new InputButton((unsigned short)(buttonCount + 2));
+					hatLeft->SetName(L"HAT Switch (Left)");
+					ButtonList.push_back(hatLeft);
+
+					InputHAT *newHAT = new InputHAT(&axisList[i], (unsigned short)i, hatUp, hatDown, hatRight, hatLeft);
 
 					// Set HAT Name
 					newHAT->SetName(L"HAT Switch");
 
 					HATList.push_back(newHAT);
+
+
 				}
 				else if (axisList[i].Range.UsageMin > 0x20)
 				{
@@ -163,15 +181,15 @@ namespace TChapman500
 
 		void Joystick::AddCustomHAT(unsigned short up, unsigned short down, unsigned short right, unsigned short left, std::wstring name)
 		{
-			for (int i = 0, x = ButtonList.size(); i < x; i++)
-			{
-				if (ButtonList[i]->ButtonID == up || ButtonList[i]->ButtonID == down || ButtonList[i]->ButtonID == right || ButtonList[i]->ButtonID == left)
-				{
-					ButtonList.erase(ButtonList.begin() + i);
-					x = ButtonList.size();
-					i--;
-				}
-			}
+			//for (int i = 0, x = ButtonList.size(); i < x; i++)
+			//{
+			//	if (ButtonList[i]->ButtonID == up || ButtonList[i]->ButtonID == down || ButtonList[i]->ButtonID == right || ButtonList[i]->ButtonID == left)
+			//	{
+			//		ButtonList.erase(ButtonList.begin() + i);
+			//		x = ButtonList.size();
+			//		i--;
+			//	}
+			//}
 
 			HIDP_VALUE_CAPS valueCap;
 			ZeroMemory(&valueCap, sizeof(HIDP_VALUE_CAPS));
@@ -184,10 +202,7 @@ namespace TChapman500
 			CustomHAT *newHAT = new CustomHAT(_ButtonList[up], _ButtonList[down], _ButtonList[right], _ButtonList[left]);
 
 			// Set name if available.
-			if (name.size() > 0)
-			{
-				newHAT->SetName(name.data());
-			}
+			if (name.size() > 0) newHAT->SetName(name.data());
 
 			_ValueList.push_back(new InputAxis(&valueCap));
 			HATList.push_back(newHAT);

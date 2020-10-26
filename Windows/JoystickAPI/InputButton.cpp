@@ -37,5 +37,7 @@ namespace TChapman500
 				FallingEdge = false;
 			}
 		}
+		bool InputButton::IsButton() { return true; }
+		bool InputButton::IsHAT() { return false; }
 	}
 }

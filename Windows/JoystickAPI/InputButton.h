@@ -10,6 +10,8 @@ namespace TChapman500
 		public:
 			InputButton(unsigned short buttonID);
 			void SetValue(unsigned long value) override;
+			bool IsButton() override;
+			bool IsHAT() override;
 
 			unsigned short ButtonID;
 			bool Pressed;

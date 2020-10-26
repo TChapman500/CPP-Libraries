@@ -13,11 +13,6 @@ namespace TChapman500
 			CustomHAT(InputButton *up, InputButton *down, InputButton *right, InputButton *left);
 			void SetValue(unsigned long value) override;
 
-		private:
-			InputButton *Up;
-			InputButton *Down;
-			InputButton *Right;
-			InputButton *Left;
 		};
 	}
 }

@@ -8,26 +8,17 @@ namespace TChapman500
 {
 	namespace JoystickAPI
 	{
+		class InputButton;
+
 		class InputHAT : public InputControl
 		{
 		public:
 			InputHAT();
-			InputHAT(HIDP_VALUE_CAPS *caps, unsigned short valueID);
+			InputHAT(HIDP_VALUE_CAPS *caps, unsigned short valueID, InputButton *up, InputButton *down, InputButton *right, InputButton *left);
 			virtual ~InputHAT();
 			virtual void SetValue(unsigned long value) override;
-
-			enum class direction
-			{
-				Top,
-				TopRight,
-				Right,
-				BottomRight,
-				Bottom,
-				BottomLeft,
-				Left,
-				TopLeft,
-				None
-			};
+			bool IsButton() override;
+			bool IsHAT() override;
 
 			USAGE Page;
 			direction Direction;
@@ -35,6 +26,12 @@ namespace TChapman500
 			unsigned long MinValue;
 			unsigned long MaxValue;
 			bool MovedThisFrame;
+
+		protected:
+			InputButton *Up;
+			InputButton *Down;
+			InputButton *Right;
+			InputButton *Left;
 		};
 	}
 }

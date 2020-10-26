@@ -73,5 +73,8 @@ namespace TChapman500
 			}
 
 		}
+
+		bool InputAxis::IsButton() { return false; }
+		bool InputAxis::IsHAT() { return false; }
 	}
 }
