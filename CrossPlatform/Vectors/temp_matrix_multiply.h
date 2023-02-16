@@ -25,6 +25,17 @@ union matrix4
 	};
 };
 
+// Helper Function (essentially just a dot product)
+inline __m256d _mm256_dp_pd(__m256d &a, __m256d &b)
+{
+	__m256d result = _mm256_mul_pd(a, b);
+	result = _mm256_hadd_pd(result, result);
+	result = _mm256_permute4x64_pd(result, 0b11101000);
+	result = _mm256_hadd_pd(result, result);
+	result = _mm256_permute4x64_pd(result, 0);
+	return result;
+}
+
 // Function to optimize
 inline matrix4 operator* (matrix4 a, matrix4 b)
 {
